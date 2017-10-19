@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Welcome: {{ user.first_name }}!</h1>
+        <a href="/books/addBook">Add Book and Review</a> | <a href="/logout">Logout</a>
+      </div>
+    <div class="reviews">
+      <h2>Recent Book Reviews:</h2>
+      <div class="book_rate">
+
+        {% for book in reviewed_books %}
+          <p><a href="/books/review/{{ book.id }}">{{ book.title }}</a></p>
+          <h3>Rating:<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></h3>
+          <p id="revTag"><a href="/books/usersPage/{{ book.user.id }}">{{ book.user.first_name }}</a> says:  {{ book.reviews.all.last.review }}</p>
+
+        {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+    <div class="reviewsR">
+      <h2>Other Books with Reviews:</h2>
+      <div class="books">
+        {% for book in allBooks %}
+          <p><a href="/books/review/{{book.id }}">{{ book.title }}</a></p>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+
+  </body>
+  <style media="screen">
+    .rating > span:hover:before {
+     content: "\2605";
+     position: absolute;
+    }
+    .container{
+      height: 1000px;
+      width: 970px;
+      border: solid black 1px;
+    }
+    .header{
+      height: 50px;
+      width: auto;
+      /*border: solid black 1px;*/
+    }
+    h1{
+      display: inline-block;
+      margin: 10px 530px 0px 0px;
+    }
+    .reviews{
+      height: 900px;
+      width: 59%;
+      /*border: solid black 1px;*/
+      display: inline-block;
+    }
+    .book_rate{
+      height: 500px;
+      width: 80%;
+      /*border: solid blue 1px;*/
+      margin-left: 25px;
+    }
+    #revTag{
+      margin-left: 25px;
+    }
+    h3{
+      margin-left: 25px;
+    }
+
+    .reviewsR{
+      height: 900px;
+      width: 40%;
+      /*border: solid black 1px;*/
+      display: inline-block;
+      vertical-align: top;
+    }
+    .books{
+      height: 200px;
+      width: 300px;
+      border: solid black 1px;
+      margin-left: 25px;
+      overflow: scroll;
+    }
+    #msg{
+      color: red;
+    }
+  </style>
+</html>

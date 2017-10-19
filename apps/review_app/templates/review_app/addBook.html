@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Book and Review</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+      <a href="/books">Home</a> | <a href="/logout">Logout</a>
+      </div>
+      <h1>Add a New Book Title and a Review:</h1>
+
+
+
+      <form  action="/books/create" method="post">
+        {% csrf_token %}
+        <h3>Book Title: <input type="text" name="title"></h3>
+        <h3>Author: </h3><br>
+        <h4>Choose from the list: <select>
+          {% for author in book_authors %}
+            <option value="authors">{{ author.author }}</option>
+          {% endfor %}
+          </select></h4>
+          <h4>Or add a new author: <input type="text" name="author"></h4>
+          <h3>Review:</h3><br>
+            <textarea name="review" rows="8" cols="80"></textarea>
+          <h3>Rating: <select class="rate" name="rate">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select> stars!</h3>
+        <input id="addBook" type="submit" value="Add Book and Review">
+      </form>
+    </div>
+
+  </body>
+  <style media="screen">
+    .container{
+      height: 1000px;
+      width: 970px;
+      border: solid black 1px;
+    }
+    .header{
+      height: 25px;
+      width: 100%;
+      text-align: right;
+    }
+    a{
+      margin:10px 10px;
+    }
+    textarea{
+      vertical-align: top:
+    }
+    #addBook{
+      margin: 0px 0px 0px 750px;
+    }
+    h4{
+      margin: 0px 0px 15px 75px;
+    }
+    h3{
+      margin: 25px 0px 0px 25px;
+    }
+  </style>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Review</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/books">Home</a> | <a href="/logout">Logout</a>
+      </div>
+      <div class="book_title">
+        <h1>{{ book.title }}</h1>
+        <h2>Author: {{ book.author }}</h2>
+      </div>
+      <div class="reviews">
+        <h2>Reviews:</h2>
+        {% for review in userReviews %}
+        <div class="eachRev">
+          <h3 class="rating">Rating:<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></h3>
+          <h3><a href="/books/usersPage/{{ review.book.user.id }}">{{ review.book.user.first_name }}:</a> {{ review.review }} |   {% if request.session.id == review.book.user.id %}
+            <a id="revdel" href="/books/delete/{{ review.id }}">Delete This Review</a>
+          {% else %}
+          {% endif%}</h3>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="addReview">
+        <h2>Add a Review:</h2>
+        <form action="/books/addReview/{{ book.id }}" method="post">
+          {% csrf_token %}
+          <textarea name="review" rows="8" cols="60"></textarea>
+          <h3>Rating: <select class="rate" name="rate">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select> stars!</h3>
+          <input id="sub_btn" type="submit" value="Submit Review">
+        </form>
+      </div>
+    </div>
+  </body>
+  <style media="screen">
+    .rating{
+      unicode-bidi: bidi-override;
+    }
+    .rating > span:hover:before{
+      content: "\2605";
+      position: absolute;
+    }
+    .container{
+      height: 1000px;
+      width: 970px;
+      border: solid black 1px;
+      padding: 15px;
+    }
+    .header{
+    text-align: right;
+    }
+    h3{
+      margin-left: 25px;
+    }
+    .reviews{
+      height: 500px;
+      width: 500px;
+      display: inline-block;
+      overflow: scroll;
+    }
+    .addReview{
+      height: 500px;
+      width: 400px;
+      display: inline-block;
+      vertical-align: top;
+    }
+    #sub_btn{
+      position: absolute;
+      top: 407px;
+      left: 866px;
+    }
+    .book_title{
+      height: 125px;
+      width: 100%;
+    }
+    .eachRev{
+      height: 100px;
+      width: 95%;
+      border-top: solid black 1px;
+    }
+    #revdel{
+      font-size: 12px;
+    }
+  </style>
+
+</html>
